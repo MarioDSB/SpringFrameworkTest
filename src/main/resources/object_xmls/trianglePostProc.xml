@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <bean id="triangle_pointlist" class="my.spring.first_example.Shapes.Triangle">
+        <constructor-arg>
+            <list>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="20"/>
+                    <constructor-arg name="y" value="0"/>
+                </bean>
+                <ref bean="zeroPoint"/>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="0"/>
+                    <constructor-arg name="y" value="20"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="zeroPoint" class="my.spring.first_example.Shapes.Point">
+        <constructor-arg name="x" value="${zeroPoint.X}"/>
+        <constructor-arg name="y" value="${zeroPoint.Y}"/>
+    </bean>
+
+    <!--
+    These bean insert a BeanPostProcessor
+    BeanPostProcessors run some code before/after the initialization of the beans
+    -->
+    <bean class="my.spring.first_example.PostProcs.DisplayBeanNameFacPP"/>
+    <bean class="my.spring.first_example.PostProcs.DisplayBeanNamePostProc"/>
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="location" value="application.properties"/>
+    </bean>
+
+    <!--
+    Annotation-related BeanPostProcs can be defined using the annotation-config tag of the context namespace
+    <context:annotation-config/>
+    -->
+</beans>

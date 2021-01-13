@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "zeroPoint.X",
+      "type": "java.lang.Integer",
+      "description": "Description for zeroPoint.X."
+    },
+    {
+      "name": "zeroPoint.Y",
+      "type": "java.lang.Integer",
+      "description": "Description for zeroPoint.Y."
+    }
+  ] }

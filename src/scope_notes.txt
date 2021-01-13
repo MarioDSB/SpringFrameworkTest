@@ -1,0 +1,15 @@
+  By default, Spring's Application Context only creates one Bean instance per bean defined.
+  This means that a getBean(<BeanID>) call will always return the same object, independently of which class made
+the call.        <-----------        Singleton scope
+
+  For Spring to return new objects with each getBean(<BeanID>) call, the scope needs to be changed to Prototype,
+instead of Singleton.
+
+  There are also "Web-aware Context Bean Scopes" such as:
+    Request - New bean per servlet request:
+      Spring is aware of when a new request happened and might create a new Bean, depending on the request.
+    Session - New bean per session:
+      (Similar to the Request scope, but with sessions)
+    Global Session - New bean per global HTTP session (portlet context)
+
+  Scopes can be specified in <bean> nodes, with the "scope=<scope>" tag, in the .xml files

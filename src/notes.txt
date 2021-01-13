@@ -1,0 +1,4 @@
+    Checking the output of the application, it can be observed that the initialization methods are executed
+before any *getBean* call. That is because spring initializes every bean on startup.
+    It is possible to initialize beans only when needed by using the "default-lazy-init=true" parameter in the
+<beans> node.

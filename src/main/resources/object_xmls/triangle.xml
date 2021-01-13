@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+
+    <bean id="triangle_setter" class="my.spring.first_example.Shapes.Triangle">
+        <property name="type" value="equilateral"/>
+        <property name="height" value="6"/>
+        <property name="length" value="9"/>
+    </bean>
+
+    <bean id="triangle_constructor" class="my.spring.first_example.Shapes.Triangle">
+        <constructor-arg name="type" value="acute"/>
+    </bean>
+
+    <bean id="triangle_constructor_no_type" class="my.spring.first_example.Shapes.Triangle">
+        <constructor-arg name="height" value="7"/>
+        <constructor-arg name="length" value="2"/>
+    </bean>
+
+    <bean id="triangle_inheritance" class="my.spring.first_example.Shapes.Triangle" parent="triangle_setter">
+        <constructor-arg name="pointA" ref="zeroPoint"/>
+        <constructor-arg name="pointB">
+            <bean class="my.spring.first_example.Shapes.Point">
+                <constructor-arg name="x" value="0"/>
+                <constructor-arg name="y" value="20"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg name="pointC">
+            <bean class="my.spring.first_example.Shapes.Point">
+                <constructor-arg name="x" value="20"/>
+                <constructor-arg name="y" value="0"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="triangle_parent_list" class="my.spring.first_example.Shapes.Triangle" abstract="true">
+        <property name="points">
+            <list>
+                <ref bean="zeroPoint"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="triangle_list_inheritance" class="my.spring.first_example.Shapes.Triangle" parent="triangle_parent_list">
+        <property name="points">
+            <list merge="true">
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="20"/>
+                    <constructor-arg name="y" value="0"/>
+                </bean>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="0"/>
+                    <constructor-arg name="y" value="20"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="triangle_points" class="my.spring.first_example.Shapes.Triangle">
+        <constructor-arg name="pointA" ref="zeroPoint"/>
+        <constructor-arg name="pointB">
+            <bean class="my.spring.first_example.Shapes.Point">
+                <constructor-arg name="x" value="0"/>
+                <constructor-arg name="y" value="20"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg name="pointC">
+            <bean class="my.spring.first_example.Shapes.Point">
+                <constructor-arg name="x" value="20"/>
+                <constructor-arg name="y" value="0"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="triangle_pointlist" class="my.spring.first_example.Shapes.Triangle">
+        <constructor-arg>
+            <list>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="20"/>
+                    <constructor-arg name="y" value="0"/>
+                </bean>
+                <ref bean="zeroPoint"/>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="0"/>
+                    <constructor-arg name="y" value="20"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="triangle_abstractcontext" class="my.spring.first_example.Shapes.TriangleAbstractContext">
+        <constructor-arg>
+            <list>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="20"/>
+                    <constructor-arg name="y" value="0"/>
+                </bean>
+                <ref bean="zeroPoint"/>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="0"/>
+                    <constructor-arg name="y" value="20"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="triangle_myinit" class="my.spring.first_example.Shapes.TriangleInitTest"
+          init-method="myInit" destroy-method="myDestroy">
+        <constructor-arg>
+            <list>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="20"/>
+                    <constructor-arg name="y" value="0"/>
+                </bean>
+                <ref bean="zeroPoint"/>
+                <bean class="my.spring.first_example.Shapes.Point">
+                    <constructor-arg name="x" value="0"/>
+                    <constructor-arg name="y" value="20"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="zeroPoint" class="my.spring.first_example.Shapes.Point">
+        <qualifier value="pointRelated"/>
+        <constructor-arg name="x" value="0"/>
+        <constructor-arg name="y" value="0"/>
+    </bean>
+</beans>

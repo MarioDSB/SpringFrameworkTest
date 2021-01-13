@@ -1,0 +1,6 @@
+    To initialize/destroy multiple beans with methods which possess the same name, we can configure it in the
+<beans> node, by using the "default-init-method=<initMethod>" and the "default-destroy-method=<destroyMethod"
+parameters.
+
+    Implementing init and destroy methods can also be done by implementing the InitializingBean and DisposableBean
+interfaces on the classes themselves.
